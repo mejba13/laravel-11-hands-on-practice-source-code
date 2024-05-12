@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html class="h-full bg-gray-100">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laracasts - 30 Days to Learn Laravel </title>
+    <title>{{ $headings }} - Laracasts - 30 Days to Learn Laravel </title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,16 +17,7 @@
 
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
-
-    <!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
+<body class="font-sans antialiased dark:bg-black dark:text-white/50 h-full">
     <div class="min-h-full">
         <nav class="bg-gray-800">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,14 +29,9 @@
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="/"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
-                                <a href="/about"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
-                                <a href="/contact"
-                                    class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                                <x-nav-link href="/about" id="Testing ID" :active="request()->is('about')">About</x-nav-link>
+                                <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
                             </div>
                         </div>
                     </div>
@@ -103,14 +89,9 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="/"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Home</a>
-                    <a href="/about"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
-                    <a href="/contact"
-                        class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Contact</a>
+                    <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                    <x-nav-link href="/about" id="Testing ID" :active="request()->is('about')">About</x-nav-link>
+                    <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
                 </div>
                 <div class="border-t border-gray-700 pb-3 pt-4">
                     <div class="flex items-center px-5">
