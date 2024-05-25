@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:headings>
-        Job Listings
+        Job Listing
     </x-slot:headings>
 
     <ul>

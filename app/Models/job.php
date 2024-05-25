@@ -7,33 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rules\In;
 
-class job
-{
+class Job extends Model {
 
-    public static function all(): array
-    {
+    protected $table = 'job_listings';
 
-        return [
-            [
-                'id'    => 1,
-                'title' => 'Director',
-                'salary' => '$50,000'
-            ],
-            [
-                'id'    => 2,
-                'title' => 'Programmer',
-                'salary' => '$10,000'
-            ],
-            [
-                'id'    => 3,
-                'title' => 'Teacher',
-                'salary' => '$40,000'
-            ]
-        ];
-    }
+    protected $fillable = ['title','salary'];
 
-    public static function find(int $id): array
-    {
-        return Arr::first(static::all(), fn ($job) => $job['id'] == $id);
-    }
 }
