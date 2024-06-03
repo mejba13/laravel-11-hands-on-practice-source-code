@@ -9,9 +9,27 @@ Route::get('/', function () {
     return view('home');
 });
 
+// Normar code
+//Route::get('/jobs', function () {
+//    return view('jobs', [
+//        'jobs' => Job::all()
+//    ]);
+//});
+
+// Eager Loading abd solved N+1 issue
+//Route::get('/jobs', function () {
+//    $job = Job::with('employer')->get();
+//
+//    return view('jobs', [
+//        'jobs' => $job
+//    ]);
+//});
+//
 Route::get('/jobs', function () {
+    $job = Job::with('employer')->paginate(5);
+
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => $job
     ]);
 });
 
