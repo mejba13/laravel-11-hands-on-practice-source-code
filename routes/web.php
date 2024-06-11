@@ -9,30 +9,17 @@ Route::get('/', function () {
     return view('home');
 });
 
-// Normar code
-//Route::get('/jobs', function () {
-//    return view('jobs', [
-//        'jobs' => Job::all()
-//    ]);
-//});
 
-// Eager Loading abd solved N+1 issue
-//Route::get('/jobs', function () {
-//    $job = Job::with('employer')->get();
-//
-//    return view('jobs', [
-//        'jobs' => $job
-//    ]);
-//});
-//
 Route::get('/jobs', function () {
-//    $job = Job::with('employer')->paginate(5);
-//    $job = Job::with('employer')->simplePaginate(5);
-    $job = Job::with('employer')->cursorPaginate(5);
+    $job = Job::with('employer')->latest()->simplePaginate(5);
 
-    return view('jobs', [
+    return view('jobs.index', [
         'jobs' => $job
     ]);
+});
+
+Route::get('jobs/create', function () {
+    return view('jobs.create');
 });
 
 Route::get('/jobs/{id}', function ($id) {
@@ -43,7 +30,19 @@ Route::get('/jobs/{id}', function ($id) {
         abort(404);
     }
 
-    return view('job', ['job' => $job]);
+    return view('jobs.show', ['job' => $job]);
+});
+
+Route::post('/jobs', function () {
+//    dd(request('title'));
+
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id' => 1
+    ]);
+
+    return redirect('/jobs');
 });
 
 Route::get('/contact', function () {
