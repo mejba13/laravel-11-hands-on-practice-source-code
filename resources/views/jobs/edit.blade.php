@@ -3,12 +3,11 @@
         Edit Job: {{ $job->title }}
     </x-slot:headings>
 
-    <form method="POST" action="/jobs/{{$job->id }}}">
+    <form method="POST" action="/jobs/{{ $job->id }}">
         @csrf
         @method('PATCH')
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
-                <h2 class="text-base font-semibold leading-7 text-gray-900">Create a New Job</h2>
                 <p class="mt-1 text-sm leading-6 text-gray-600">We just need a handful details from you</p>
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

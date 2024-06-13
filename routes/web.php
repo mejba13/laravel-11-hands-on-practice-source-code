@@ -67,11 +67,11 @@ Route::get('/jobs/{id}/edit', function ($id) {
 });
 
 //update
-Route::patch('/jobs/{id}/', function ($id) {
+Route::patch('/jobs/{id}', function ($id) {
 
     request()->validate([
         'title' => ['required', 'min:3'],
-        'salary' => ['required', 'numeric'],
+        'salary' => ['required'],
     ]);
 
     $job = Job::findOrFail($id); // return all
@@ -83,9 +83,10 @@ Route::patch('/jobs/{id}/', function ($id) {
     $job->update([
         'title' => request('title'),
         'salary' => request('salary'),
+        'employer_id' => 1
     ]);
 
-    return redirect('/jobs/'. $job->id);
+    return redirect('/jobs/' . $job->$id);
 
 });
 
