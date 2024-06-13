@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorejobRequest;
-use App\Http\Requests\UpdatejobRequest;
-use App\Models\job;
+use App\Models\Job;
+use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -13,54 +12,67 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $job = Job::with('employer')->latest()->simplePaginate(5);
+
+        return view('jobs.index', [
+            'jobs' => $job
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('jobs.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorejobRequest $request)
+    public function show(Job $job)
     {
-        //
+        return view('jobs.show', ['job' => $job]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(job $job)
+
+    public function store()
     {
-        //
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'salary' => ['required', 'numeric'],
+        ]);
+
+        Job::create([
+            'title' => request('title'),
+            'salary' => request('salary'),
+            'employer_id' => 1
+        ]);
+
+        return redirect('/jobs');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(job $job)
+    public function edit(Job $job)
     {
-        //
+        return view('jobs.edit', ['job' => $job]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatejobRequest $request, job $job)
+    public function update(Job $job)
     {
-        //
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'salary' => ['required']
+        ]);
+
+        $job->update([
+            'title' => request('title'),
+            'salary' => request('salary'),
+        ]);
+
+        return redirect('/jobs/' . $job->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(job $job)
+    public function destroy(Job $job)
     {
-        //
+        $job->delete();
+
+        return redirect('/jobs');
     }
 }
